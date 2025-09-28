@@ -4,12 +4,11 @@ import GetSpecificCategory from "@/api/GetSpecificCategory";
 import GetCategoryProducts from "@/api/GetCategoryProduct";
 import CategoryProductsGrid from "@/app/_components/CategoryProductGrid/CategoryProductGrid";
 
-interface CategoryProductsPageProps {
+export default async function CategoryProductsPage({
+  params,
+}: {
   params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default async function CategoryProductsPage({ params }: CategoryProductsPageProps) {
+}) {
   console.log("Category products page params:", params);
 
   const [category, products] = await Promise.all([

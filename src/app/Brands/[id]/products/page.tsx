@@ -4,12 +4,11 @@ import GetSpecificBrand from "@/api/GetSpecificBrand";
 import GetBrandProducts from "@/api/GetProduct";
 import BrandProductsGrid from "@/app/_components/BrandProduct/BrandProductGrid";
 
-interface BrandProductsPageProps {
+export default async function BrandProductsPage({
+  params,
+}: {
   params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default async function BrandProductsPage({ params }: BrandProductsPageProps) {
+}) {
   const [brand, products] = await Promise.all([
     GetSpecificBrand(params.id),
     GetBrandProducts(params.id),

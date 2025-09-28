@@ -3,12 +3,11 @@ import { notFound } from "next/navigation";
 import GetSpecificCategory from "@/api/GetSpecificCategory";
 import CategoryDetail from "@/app/_components/CategoryDetails/CategoryDetails";
 
-interface CategoryPageProps {
+export default async function CategoryPage({
+  params,
+}: {
   params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default async function CategoryPage({ params }: CategoryPageProps) {
+}) {
   console.log("Category page params:", params);
 
   const category = await GetSpecificCategory(params.id);
