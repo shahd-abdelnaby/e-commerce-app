@@ -1,22 +1,26 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import GetSpecificCategory from "@/api/GetSpecificCategory";
-import CategoryDetail from "@/app/_components/CategoryDetails/CategoryDetails";
+import GetCategoryProducts from "@/api/GetCategoryProduct";
+import CategoryProductsGrid from "@/app/_components/CategoryProductGrid/CategoryProductGrid";
 
-export default async function CategoryPage({
+export default async function CategoryProductsPage({
   params,
 }: {
   params: { id: string };
 }) {
-  console.log("Category page params:", params);
+  console.log("Category products page params:", params);
 
-  const category = await GetSpecificCategory(params.id);
-  console.log("Fetched category:", category);
+  const [category, products] = await Promise.all([
+    GetSpecificCategory(params.id),
+    GetCategoryProducts(params.id),
+  ]);
 
   if (!category) {
-    console.log("Category not found, redirecting to not-found");
+    console.log("Category not found for products page");
     notFound();
   }
 
-  return <CategoryDetail category={category} />;
+  return <CategoryProductsGrid products={products} category={category} />;
 }
+
